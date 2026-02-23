@@ -1,0 +1,15 @@
+💭 Message Value Object
+💭 Represents an immutable turn in a conversation
+
+🕊 ✉️ 🍇
+  🖍🆕 role 🔡     💭 user, assistant, or tool
+  🖍🆕 content 🔡  💭 The textual content or tool call/result
+  
+  🆕 🍼 role 🔡 🍼 content 🔡 🍇🍉
+  
+  💭 Returns the sender role
+  ❓ 👤 ➡️ 🔡 🍇 ↩️ role 🍉
+
+  💭 Returns the message text
+  ❓ 📄 ➡️ 🔡 🍇 ↩️ content 🍉
+🍉

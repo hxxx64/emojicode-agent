@@ -1,0 +1,19 @@
+💭 File System Port
+💭 Defines the contract for all persistent storage operations
+
+🐊 🗄 🍇
+  💭 Lists directory entries at the specified path
+  ❗️ 📂 path 🔡 recursive 👌 ➡️ 🔡
+  
+  💭 Reads the full content of a file
+  ❗️ 📖 path 🔡 ➡️ 🔡
+  
+  💭 Writes (overwrites) content to a file
+  ❗️ 💿 path 🔡 content 🔡 ➡️ 🔡
+  
+  💭 Applies a search/replace diff to a file
+  ❗️ 🔄 path 🔡 diff 🔡 ➡️ 🔡
+  
+  💭 Searches for a specific pattern within files
+  ❗️ 🔍 path 🔡 search 🔡 ➡️ 🔡
+🍉

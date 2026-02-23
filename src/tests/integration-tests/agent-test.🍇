@@ -1,0 +1,49 @@
+💭 Agent Integration Tests
+
+🐇 🔋 🧪 🍇
+  ✒️❗️ 🏁 🍇
+    😀 🔤🔋 Testing Agent...🔤❗️
+    
+    🆕🤥❗️ ➡️ mockAi
+    🆕📁❗️ ➡️ mockFs
+    🆕🛠 🔤test-workdir🔤 mockFs❗️ ➡️ toolExecutor
+    🆕🔍❗️ ➡️ toolParser
+    🆕📝❗️ ➡️ promptService
+    
+    🆕🤖 mockAi 🔤System Prompt🔤 promptService toolParser toolExecutor❗️ ➡️ agent
+    
+    💭 1. Simple response (no tools)
+    💊 mockAi 🔤Hello! I am an agent.🔤❗️
+    🎯 agent 🔤Hi!🔤 🤷❗️ ➡️ r1
+    ↪️ 🔍 r1 🔤Hello!🔤❗️ ➡️ findHi 🍇 ✅ 👇 🔤agent gave simple response🔤❗️ 🍉 🙅 🍇 🙁 👇 🔤agent failed simple response🔤❗️ 🍉
+    
+    💭 2. Multi-turn tool execution
+    🧹 agent❗️
+    💊 mockAi 🔤I'll read the file. <read_file><path>foo.txt</path></read_file>🔤❗️
+    💊 mockAi 🔤The content is foo.🔤❗️
+    
+    🆕🍯🐚🔡🍆❗️ ➡️ 🖍🆕 wp
+    🔤foo.txt🔤 ➡️ 🐽 wp 🔤path🔤❗️
+    🔤foo content🔤 ➡️ 🐽 wp 🔤content🔤❗️
+    🔨 toolExecutor 🆕🔧 🔤write_file🔤 wp❗️❗️ ➡️ resW
+    
+    🎯 agent 🔤Read foo.txt🔤 🤷❗️ ➡️ r2
+    ↪️ 🔍 r2 🔤The content is foo🔤❗️ ➡️ findFoo 🍇 ✅ 👇 🔤agent successfully executed tool chain🔤❗️ 🍉 🙅 🍇 🙁 👇 🔤agent failed tool chain🔤❗️ 🍉
+    
+    💭 3. Agent Error handling: Tool fails
+    🧹 agent❗️
+    💊 mockAi 🔤I will read a non-existent file. <read_file><path>missing.txt</path></read_file>🔤❗️
+    💊 mockAi 🔤Oh, the file is missing!🔤❗️
+    
+    🎯 agent 🔤Read missing.txt🔤 🤷❗️ ➡️ r3
+    ↪️ 🔍 r3 🔤missing!🔤❗️ ➡️ findMissing 🍇 ✅ 👇 🔤agent handled tool failure correctly🔤❗️ 🍉 🙅 🍇 🙁 👇 🔤agent failed error handling🔤❗️ 🍉
+
+    💭 4. Session Persistence through turns
+    🆕📓❗️ ➡️ ps
+    📝 ps 🔤user🔤 🔤Message 1🔤❗️
+    📝 ps 🔤assistant🔤 🔤Response 1🔤❗️
+    
+    🏗 promptService 🔤Sys🔤 ps❗️ ➡️ full1
+    ↪️ 🔍 full1 🔤Message 1🔤❗️ ➡️ findM1 🍇 ✅ 👇 🔤session contains previous turns🔤❗️ 🍉 🙅 🍇 🙁 👇 🔤session lost history🔤❗️ 🍉
+  🍉
+🍉

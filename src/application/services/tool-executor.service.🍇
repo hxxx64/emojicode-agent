@@ -1,0 +1,140 @@
+💭 Tool Execution Application Service
+💭 Maps tool calls to infrastructure-specific file system operations
+
+🐇 🛠 🍇
+  🖍🆕 workdir 🔡
+  🖍🆕 fileSystemPort 🗄  💭 FileSystem Port (Interface)
+  
+  🆕 🍼 workdir 🔡 🍼 fileSystemPort 🗄 🍇🍉
+
+  💭 Internal: Resolves relative paths and enforces directory-root boundaries
+  ❗️ 📍 path 🔡 ➡️ 🍬🔡 🍇
+    ↪️ 📐 path❗️ 🙌 0 🍇
+      ↩️ 🔤.🔤
+    🍉
+    
+    💭 Security: Block absolute paths
+    🔪 path 0 1❗️ ➡️ firstPathChar
+    ↪️ firstPathChar 🙌 🔤/🔤 🍇
+      ↩️ 🤷
+    🍉
+
+    💭 Security: Block directory traversal (..)
+    🔍 path 🔤..🔤❗️ ➡️ directoryTraversalPosOpt
+    ↪️ directoryTraversalPosOpt ➡️ pos 🍇
+      ↩️ 🤷
+    🍉
+
+    path ➡️ 🖍🆕 resolvedFullPath
+    ↪️ workdir 🙌 🔤🔤 🍇
+    🍉 🙅 🍇
+      🔤🧲workdir🧲/🧲path🧲🔤 ➡️ 🖍 resolvedFullPath
+    🍉
+    ↩️ resolvedFullPath
+  🍉
+  
+  💭 Dispatches a tool call to its corresponding file system operation
+  ❗️ 🔨 toolCall 🔧 ➡️ 📤 🍇
+    📛 toolCall❓ ➡️ toolName
+    
+    ↪️ toolName 🙌 🔤read_file🔤 🍇
+      ↪️ 📥 toolCall 🔤path🔤❓ ➡️ targetPath 🍇
+        📍 👇 targetPath❗️ ➡️ resolvedPathOpt
+        ↪️ resolvedPathOpt ➡️ resolvedFullPath 🍇
+          📖 fileSystemPort resolvedFullPath❗️ ➡️ toolOutput
+          🔍 toolOutput 🔤Error:🔤❗️ ➡️ errorIndicatorPosOpt
+          ↪️ errorIndicatorPosOpt ➡️ pos 🍇 ↩️ 🆕📤 👎 toolOutput❗️ 🍉
+          ↩️ 🆕📤 👍 toolOutput❗️
+        🍉 🙅 🍇
+          ↩️ 🆕📤 👎 🔤Invalid or prohibited path: 🧲targetPath🧲🔤❗️
+        🍉
+      🍉 🙅 🍇
+        ↩️ 🆕📤 👎 🔤read_file requires 'path' parameter🔤❗️
+      🍉
+    🍉 🙅↪️ toolName 🙌 🔤write_file🔤 🍇
+      ↪️ 📥 toolCall 🔤path🔤❓ ➡️ targetPath 🍇
+        ↪️ 📥 toolCall 🔤content🔤❓ ➡️ fileContent 🍇
+          📍 👇 targetPath❗️ ➡️ resolvedPathOpt
+          ↪️ resolvedPathOpt ➡️ resolvedFullPath 🍇
+            💿 fileSystemPort resolvedFullPath fileContent❗️ ➡️ toolOutput
+            🔍 toolOutput 🔤Error:🔤❗️ ➡️ errorIndicatorPosOpt
+            ↪️ errorIndicatorPosOpt ➡️ pos 🍇 ↩️ 🆕📤 👎 toolOutput❗️ 🍉
+            ↩️ 🆕📤 👍 toolOutput❗️
+          🍉 🙅 🍇
+            ↩️ 🆕📤 👎 🔤Invalid or prohibited path: 🧲targetPath🧲🔤❗️
+          🍉
+        🍉 🙅 🍇
+          ↩️ 🆕📤 👎 🔤write_file requires 'content' parameter🔤❗️
+        🍉
+      🍉 🙅 🍇
+        ↩️ 🆕📤 👎 🔤write_file requires 'path' parameter🔤❗️
+      🍉
+        🍉 🙅↪️ toolName 🙌 🔤list_files🔤 🍇
+          ↪️ 📥 toolCall 🔤path🔤❓ ➡️ targetPath 🍇
+            📍 👇 targetPath❗️ ➡️ resolvedPathOpt
+            ↪️ resolvedPathOpt ➡️ resolvedFullPath 🍇
+              🔤false🔤 ➡️ 🖍🆕 isRecursiveString
+              ↪️ 📥 toolCall 🔤recursive🔤❓ ➡️ r 🍇 r ➡️ 🖍 isRecursiveString 🍉
+              👍 ➡️ 🖍🆕 isRecursive
+              ↪️ isRecursiveString 🙌 🔤false🔤 🍇 👎 ➡️ 🖍 isRecursive 🍉
+              
+              📂 fileSystemPort resolvedFullPath isRecursive❗️ ➡️ toolOutput
+              🔍 toolOutput 🔤Error:🔤❗️ ➡️ errorIndicatorPosOpt
+              ↪️ errorIndicatorPosOpt ➡️ pos 🍇 ↩️ 🆕📤 👎 toolOutput❗️ 🍉
+              ↩️ 🆕📤 👍 toolOutput❗️
+            🍉 🙅 🍇
+              ↩️ 🆕📤 👎 🔤Invalid or prohibited path: 🧲targetPath🧲🔤❗️
+            🍉
+          🍉 🙅 🍇
+            🔤false🔤 ➡️ 🖍🆕 isRecursiveString
+            ↪️ 📥 toolCall 🔤recursive🔤❓ ➡️ r 🍇 r ➡️ 🖍 isRecursiveString 🍉
+            👍 ➡️ 🖍🆕 isRecursive
+            ↪️ isRecursiveString 🙌 🔤false🔤 🍇 👎 ➡️ 🖍 isRecursive 🍉
+            
+            📂 fileSystemPort 🔤.🔤 isRecursive❗️ ➡️ toolOutput
+            🔍 toolOutput 🔤Error:🔤❗️ ➡️ errorIndicatorPosOpt
+            ↪️ errorIndicatorPosOpt ➡️ pos 🍇 ↩️ 🆕📤 👎 toolOutput❗️ 🍉
+            ↩️ 🆕📤 👍 toolOutput❗️
+          🍉
+        🍉
+     🙅↪️ toolName 🙌 🔤replace_in_file🔤 🍇
+      ↪️ 📥 toolCall 🔤path🔤❓ ➡️ targetPath 🍇
+        ↪️ 📥 toolCall 🔤diff🔤❓ ➡️ diff 🍇
+          📍 👇 targetPath❗️ ➡️ resolvedPathOpt
+          ↪️ resolvedPathOpt ➡️ resolvedFullPath 🍇
+            🔄 fileSystemPort resolvedFullPath diff❗️ ➡️ toolOutput
+            🔍 toolOutput 🔤Error:🔤❗️ ➡️ errorIndicatorPosOpt
+            ↪️ errorIndicatorPosOpt ➡️ pos 🍇 ↩️ 🆕📤 👎 toolOutput❗️ 🍉
+            ↩️ 🆕📤 👍 toolOutput❗️
+          🍉 🙅 🍇
+            ↩️ 🆕📤 👎 🔤Invalid or prohibited path: 🧲targetPath🧲🔤❗️
+          🍉
+        🍉 🙅 🍇
+          ↩️ 🆕📤 👎 🔤replace_in_file requires 'diff' parameter🔤❗️
+        🍉
+      🍉 🙅 🍇
+        ↩️ 🆕📤 👎 🔤replace_in_file requires 'path' parameter🔤❗️
+      🍉
+    🍉 🙅↪️ toolName 🙌 🔤search_files🔤 🍇
+      ↪️ 📥 toolCall 🔤path🔤❓ ➡️ targetPath 🍇
+        ↪️ 📥 toolCall 🔤search🔤❓ ➡️ searchTerm 🍇
+          📍 👇 targetPath❗️ ➡️ resolvedPathOpt
+          ↪️ resolvedPathOpt ➡️ resolvedFullPath 🍇
+            🔍 fileSystemPort resolvedFullPath searchTerm❗️ ➡️ toolOutput
+            🔍 toolOutput 🔤Error:🔤❗️ ➡️ errorIndicatorPosOpt
+            ↪️ errorIndicatorPosOpt ➡️ pos 🍇 ↩️ 🆕📤 👎 toolOutput❗️ 🍉
+            ↩️ 🆕📤 👍 toolOutput❗️
+          🍉 🙅 🍇
+            ↩️ 🆕📤 👎 🔤Invalid or prohibited path: 🧲targetPath🧲🔤❗️
+          🍉
+        🍉 🙅 🍇
+          ↩️ 🆕📤 👎 🔤search_files requires 'search' parameter🔤❗️
+        🍉
+      🍉 🙅 🍇
+        ↩️ 🆕📤 👎 🔤search_files requires 'path' parameter🔤❗️
+      🍉
+    🍉 🙅 🍇
+      ↩️ 🆕📤 👎 🔤Unknown tool: 🧲toolName🧲🔤❗️
+    🍉
+  🍉
+🍉

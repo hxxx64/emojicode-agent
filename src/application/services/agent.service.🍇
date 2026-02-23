@@ -1,0 +1,113 @@
+💭 Agent Application Service
+💭 Orchestrates the tool-based AI workflow and coordinates session history
+
+🐇 🤖 🍇
+  🖍🆕 aiPort 📡                 💭 AI Port (Interface)
+  🖍🆕 instructions 🔡           💭 System instructions
+  🖍🆕 promptService 📝          💭 Prompt Formatting Service
+  🖍🆕 toolParserService 🔍      💭 Tool Parsing Service
+  🖍🆕 toolExecutorService 🛠    💭 Tool Execution Service
+  🖍🆕 session 📓                💭 Session Entity
+
+  🆕 🍼 aiPort 📡 🍼 instructions 🔡 🍼 promptService 📝 🍼 toolParserService 🔍 🍼 toolExecutorService 🛠 🍇
+    🆕📓❗️ ➡️ 🖍session
+  🍉
+
+  💭 Resets the current conversation session
+  ❗️ 🧹 🍇 🧹 session❗️ 🍉
+
+  💭 Executes a task (shorthand for no-output execution)
+  ❗️ 🎯 userPrompt 🔡 ➡️ 🔡 🍇
+    ↩️ 🎯 👇 userPrompt 🤷❗️
+  🍉
+  
+  💭 Primary entry point for executing an AI agent task with real-time feedback
+  ❗️ 🎯 userPrompt 🔡 onOutput 🍬🖼️ ➡️ 🔡 🍇
+    📝 session 🔤user🔤 userPrompt❗️
+    
+    10 ➡️ maxTurns
+    0 ➡️ 🖍🆕 turn
+    
+    🔁 turn ◀️ maxTurns 🍇
+      🏗 promptService instructions session❗️ ➡️ fullPrompt
+      
+      ↪️ onOutput ➡️ out 🍇
+        ↪️ turn 🙌 0 🍇
+          📤 out 🔤🧠 Thinking...🔤❗️
+        🍉
+      🍉
+      
+      💬 aiPort fullPrompt❗️ ➡️ aiResponse
+      🔍 toolParserService aiResponse❗️ ➡️ toolCallOpt
+      
+      ↪️ toolCallOpt ➡️ toolCall 🍇
+        📝 session 🔤assistant🔤 aiResponse❗️
+        
+        ↪️ onOutput ➡️ out 🍇
+          💭 Show AI response text before the tool call
+          🔍 aiResponse 🔤<🧲📛 toolCall❓🧲🔤❗️ ➡️ openingTagPositionOpt
+          ↪️ openingTagPositionOpt ➡️ openingTagPosition 🍇
+            ↪️ openingTagPosition ▶️ 0 🍇
+              🔪 aiResponse 0 openingTagPosition❗️ ➡️ rawAiPrefix
+              rawAiPrefix ➡️ 🖍🆕 cleanedAiPrefix
+              🔍 cleanedAiPrefix 🔤```xml🔤❗️ ➡️ xmlCodeBlockStartPos
+              ↪️ xmlCodeBlockStartPos ➡️ pos 🍇 🔪 cleanedAiPrefix 0 pos❗️ ➡️ 🖍 cleanedAiPrefix 🍉
+              🔍 cleanedAiPrefix 🔤```🔤❗️ ➡️ generalCodeBlockStartPos
+              ↪️ generalCodeBlockStartPos ➡️ pos 🍇 🔪 cleanedAiPrefix 0 pos❗️ ➡️ 🖍 cleanedAiPrefix 🍉
+              
+              ↪️ 📐 cleanedAiPrefix❗️ ▶️ 0 🍇
+                💭 Only show if prefix has non-whitespace characters
+                👎 ➡️ 🖍🆕 containsNonWhitespace
+                0 ➡️ 🖍🆕 i
+                🔁 i ◀️ 📐 cleanedAiPrefix❗️ 🍇
+                  🔪 cleanedAiPrefix i 1❗️ ➡️ currentChar
+                  ↪️ currentChar 🙌 🔤❌n🔤 🍇 🍉 🙅 🍇
+                    ↪️ currentChar 🙌 🔤 🔤 🍇 🍉 🙅 🍇
+                      👍 ➡️ 🖍 containsNonWhitespace
+                    🍉
+                  🍉
+                  i ⬅️➕ 1
+                🍉
+                
+                ↪️ containsNonWhitespace 🍇
+                  📤 out 🔤❌n🤖 🧲cleanedAiPrefix🧲🔤❗️
+                🍉
+              🍉
+            🍉
+          🍉 🙅 🍇
+            ↪️ 📐 aiResponse❗️ ▶️ 0 🍇
+              📤 out 🔤❌n🤖 🧲aiResponse🧲🔤❗️
+            🍉
+          🍉
+
+          📤 out 🔤❌n🛠️  🧲📝 toolCall❓🧲🔤❗️
+        🍉
+        
+        🔨 toolExecutorService toolCall❗️ ➡️ result
+        📝 session 🔤tool🔤 📄 result❓❗️
+        
+        ↪️ onOutput ➡️ out2 🍇
+          ↪️ ✅ result❓ 🍇
+          🍉 🙅 🍇
+            📄 result❓ ➡️ rawErr
+            rawErr ➡️ 🖍🆕 cleanErr
+            ↪️ 🔍 rawErr 🔤Error: 🔤❗️ ➡️ errPos 🍇
+              ↪️ errPos 🙌 0 🍇
+                📐 rawErr❗️ ➖ 7 ➡️ l
+                🔪 rawErr 7 l❗️ ➡️ 🖍 cleanErr
+              🍉
+            🍉
+            📤 out2 🔤  ❌❌ Error: 🧲cleanErr🧲❌n🔤❗️
+          🍉
+        🍉
+        
+        turn ⬅️➕ 1
+      🍉 🙅 🍇
+        📝 session 🔤assistant🔤 aiResponse❗️
+        ↪️ onOutput ➡️ out 🍇 📤 out 🔤❌n🔤❗️ 🍉
+        ↩️ 🔤🤖 🧲aiResponse🧲🔤
+      🍉
+    🍉
+    ↩️ 🔤[Max tool turns reached]🔤
+  🍉
+🍉

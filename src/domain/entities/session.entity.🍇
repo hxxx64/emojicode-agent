@@ -1,0 +1,25 @@
+💭 Session Domain Entity
+💭 Manages the state of conversation history within a single agentic session
+
+🐇 📓 🍇
+  🖍🆕 messages 🍨🐚✉️🍆
+  
+  🆕 🍇
+    🆕🍨🐚✉️🍆❗️ ➡️ 🖍messages
+  🍉
+  
+  💭 Appends a new message (User, Assistant, or Tool result)
+  ❗️ 📝 role 🔡 content 🔡 🍇
+    🐻 messages 🆕✉️ role content❗️❗️
+  🍉
+  
+  💭 Retrieves the full conversation history
+  ❗️ 📚 ➡️ 🍨🐚✉️🍆 🍇
+    ↩️ messages
+  🍉
+  
+  💭 Resets the session history
+  ❗️ 🧹 🍇
+    🆕🍨🐚✉️🍆❗️ ➡️ 🖍messages
+  🍉
+🍉

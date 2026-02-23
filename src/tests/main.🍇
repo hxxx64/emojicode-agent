@@ -1,0 +1,51 @@
+💭 emojicode agent — Full Test Suite
+📦 testtube 🏠
+
+📜 🔤../application/services/agent.service.🍇🔤
+📜 🔤../application/services/tool-executor.service.🍇🔤
+📜 🔤../domain/entities/session.entity.🍇🔤
+📜 🔤../domain/ports/ai.port.🍇🔤
+📜 🔤../domain/ports/file-system.port.🍇🔤
+📜 🔤../domain/ports/input.port.🍇🔤
+📜 🔤../domain/ports/output.port.🍇🔤
+📜 🔤../domain/services/prompt.service.🍇🔤
+📜 🔤../domain/services/tool-parser.service.🍇🔤
+📜 🔤../domain/value-objects/message.vo.🍇🔤
+📜 🔤../domain/value-objects/tool-call.vo.🍇🔤
+📜 🔤../domain/value-objects/tool-result.vo.🍇🔤
+📜 🔤../infrastructure/config/system-prompt.config.🍇🔤
+📜 🔤utils/mocks.🍇🔤
+
+📜 🔤unit-tests/session-test.🍇🔤
+📜 🔤unit-tests/tool-parser-test.🍇🔤
+📜 🔤unit-tests/tool-executor-test.🍇🔤
+📜 🔤integration-tests/agent-test.🍇🔤
+
+💭 --- Global Test Runner ---
+🐇 🔬 🧪 🍇
+  ✒️❗️ 🏁 🍇
+    😀 🔤━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━🔤❗️
+    😀 🔤🍇 emojicode agent — Full Test Suite🔤❗️
+    😀 🔤━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━🔤❗️
+
+    👔 🆕🧼❗️❗️ ➡️ r1
+    👔 🆕🧬❗️❗️ ➡️ r2
+    👔 🆕⚙️❗️❗️ ➡️ r3
+    👔 🆕🔋❗️❗️ ➡️ r4
+    
+    😀 🔤━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━🔤❗️
+    😀 🔤📊 Tests Summary:🔤❗️
+    😀 🔤━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━🔤❗️
+    😀 🔤🧼 Session:  🧲r1🧲 failures🔤❗️
+    😀 🔤🧬 Parser:   🧲r2🧲 failures🔤❗️
+    😀 🔤⚙️ Executor: 🧲r3🧲 failures🔤❗️
+    😀 🔤🔋 Agent:    🧲r4🧲 failures🔤❗️
+    😀 🔤━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━🔤❗️
+  🍉
+🍉
+
+🏁 ➡️ 🔢 🍇
+  👔🆕🔬❗️❗️ ➡️ failures
+  ↪️ failures ▶️ 0 🍇 ↩️ 1 🍉
+  ↩️ 0
+🍉

@@ -1,0 +1,15 @@
+💭 Native File System Adapter
+💭 Direct bridge to system file operations via C++ FFI
+
+🐇 💾 🍇
+  🐊 🗄
+  
+  🆕 🍇🍉
+  
+  💭 FFI mappings to native system calls
+  ❗️ 📂 path 🔡 recursive 👌 ➡️ 🔡 📻 🔤toolexec_listdir🔤
+  ❗️ 📖 path 🔡 ➡️ 🔡 📻 🔤toolexec_read_file🔤
+  ❗️ 💿 path 🔡 content 🔡 ➡️ 🔡 📻 🔤toolexec_write_file🔤
+  ❗️ 🔄 path 🔡 diff 🔡 ➡️ 🔡 📻 🔤toolexec_replace_in_file🔤
+  ❗️ 🔍 path 🔡 search 🔡 ➡️ 🔡 📻 🔤toolexec_search_files🔤
+🍉

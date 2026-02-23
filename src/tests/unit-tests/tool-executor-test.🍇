@@ -1,0 +1,51 @@
+💭 ToolExecutor Unit Tests
+
+🐇 ⚙️ 🧪 🍇
+  ✒️❗️ 🏁 🍇
+    😀 🔤⚙️ Testing ToolExecutor...🔤❗️
+    
+    🆕📁❗️ ➡️ mockFs
+    🆕🛠 🔤workdir🔤 mockFs❗️ ➡️ executor
+    
+    💭 1. Security: Traversal
+    📍 executor 🔤../../etc/passwd🔤❗️ ➡️ bad1
+    ↪️ bad1 ➡️ b 🍇 🙁 👇 🔤traversal not blocked (../../)🔤❗️ 🍉 🙅 🍇 ✅ 👇 🔤traversal blocked (../../)🔤❗️ 🍉
+
+    📍 executor 🔤src/../main.🍇🔤❗️ ➡️ bad2
+    ↪️ bad2 ➡️ b 🍇 🙁 👇 🔤traversal not blocked (src/../)🔤❗️ 🍉 🙅 🍇 ✅ 👇 🔤traversal blocked (src/../)🔤❗️ 🍉
+
+    💭 2. Security: Absolute Path
+    📍 executor 🔤/usr/bin/python🔤❗️ ➡️ bad3
+    ↪️ bad3 ➡️ b 🍇 🙁 👇 🔤absolute path not blocked🔤❗️ 🍉 🙅 🍇 ✅ 👇 🔤absolute path blocked🔤❗️ 🍉
+
+    💭 3. read_file (successful)
+    🆕🍯🐚🔡🍆❗️ ➡️ 🖍🆕 wp
+    🔤test.txt🔤 ➡️ 🐽 wp 🔤path🔤❗️
+    🔤Hello World🔤 ➡️ 🐽 wp 🔤content🔤❗️
+    🔨 executor 🆕🔧 🔤write_file🔤 wp❗️❗️ ➡️ resW
+    ⛔ 👇 ✅ resW❓ 🔤write should succeed🔤❗️
+    
+    🆕🍯🐚🔡🍆❗️ ➡️ 🖍🆕 rp
+    🔤test.txt🔤 ➡️ 🐽 rp 🔤path🔤❗️
+    🔨 executor 🆕🔧 🔤read_file🔤 rp❗️❗️ ➡️ resR
+    ⛔ 👇 ✅ resR❓ 🔤read should succeed🔤❗️
+    🔡 👇 📄 resR❓ 🔤Hello World🔤 🔤content should match what was written🔤❗️
+
+    💭 4. read_file (not found)
+    🆕🍯🐚🔡🍆❗️ ➡️ 🖍🆕 nfp
+    🔤not_found.txt🔤 ➡️ 🐽 nfp 🔤path🔤❗️
+    🔨 executor 🆕🔧 🔤read_file🔤 nfp❗️❗️ ➡️ resNF
+    ↪️ ✅ resNF❓ 🍇 🙁 👇 🔤read should fail for missing file🔤❗️ 🍉 🙅 🍇 ✅ 👇 🔤read failed as expected🔤❗️ 🍉
+
+    💭 5. list_files
+    🆕🍯🐚🔡🍆❗️ ➡️ 🖍🆕 lp
+    🔤.🔤 ➡️ 🐽 lp 🔤path🔤❗️
+    🔨 executor 🆕🔧 🔤list_files🔤 lp❗️❗️ ➡️ resL
+    ⛔ 👇 ✅ resL❓ 🔤list_files should succeed🔤❗️
+    ↪️ 🔍 📄 resL❓ 🔤index.js🔤❗️ ➡️ findIdx 🍇 ✅ 👇 🔤found index.js in listing🔤❗️ 🍉 🙅 🍇 🙁 👇 🔤did not find index.js in listing🔤❗️ 🍉
+
+    💭 6. Unknown tool
+    🔨 executor 🆕🔧 🔤unknown_tool🔤 🆕🍯🐚🔡🍆❗️❗️❗️ ➡️ resU
+    ↪️ ✅ resU❓ 🍇 🙁 👇 🔤unknown tool should fail🔤❗️ 🍉 🙅 🍇 ✅ 👇 🔤unknown tool failed as expected🔤❗️ 🍉
+  🍉
+🍉

@@ -1,0 +1,43 @@
+💭 Mock AI Adapter
+💭 Pattern-matching based backend for local development and offline testing
+
+🐇 🎭 🍇
+  🖍🆕 responses 🍯🐚🔡🍆  💭 Mapping of user prompt fragments to AI responses
+
+  🆕 🍇
+    🍿
+      🔤read🔤 ➡️ 🔤<read_file><path>src/main.🍇</path></read_file>🔤
+      🔤list🔤 ➡️ 🔤<list_files><path>.</path><recursive>false</recursive></list_files>🔤
+      🔤write🔤 ➡️ 🔤<write_file><path>test.txt</path><content>Hello World</content></write_file>🔤
+      🔤search🔤 ➡️ 🔤<search_files><path>src</path><search>🤖</search></search_files>🔤
+      🔤fix typo🔤 ➡️ 🔤<replace_in_file><path>example.js</path><diff><<<<<<< SEARCH
+Helo World
+=======
+Hello World
+>>>>>>> REPLACE
+</diff></replace_in_file>🔤
+      🔤replace🔤 ➡️ 🔤<replace_in_file><path>src/main.🍇</path><diff><<<<<<< SEARCH
+old content
+=======
+new content
+>>>>>>> REPLACE
+</diff></replace_in_file>🔤
+    🍆 ➡️ 🖍responses
+  🍉
+  
+  💭 Simulates AI decision-making based on user input patterns
+  ❗️ 💬 prompt 🔡 ➡️ 🔡 🍇
+    🔂 pattern 🐙 responses❗️ 🍇
+      ↪️ 🔍 prompt pattern❗️ ➡️ pos 🍇
+        ↪️ 🐽 responses pattern❗️ ➡️ response 🍇
+          ↩️ response
+        🍉
+      🍉
+    🍉
+    
+    💭 Default fallback if no pattern matches
+    ↩️ 🔤<list_files><path>.</path><recursive>false</recursive></list_files>🔤
+  🍉
+  
+  🐊 📡
+🍉

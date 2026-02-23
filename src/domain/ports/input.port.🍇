@@ -1,0 +1,7 @@
+💭 User Input Port
+💭 Defines the contract for acquiring user commands (e.g., stdin, mock)
+
+🐊 📋 🍇
+  💭 Displays a prompt and blocks until a line of input is received
+  ❗️ 📖 prompt 🔡 ➡️ 🔡
+🍉

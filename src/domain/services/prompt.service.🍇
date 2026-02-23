@@ -1,0 +1,41 @@
+💭 Prompt Formatting Domain Service
+💭 Formats instructions and session history into a unified model-specific string
+
+🐇 📝 🍇
+  🆕 🍇🍉
+
+  💭 Orchestrates the formatting of the full system and history context
+  ❗️ 🏗 systemPrompt 🔡 session 📓 ➡️ 🔡 🍇
+    🆕🔠❗️ ➡️ buf
+    
+    💭 Append system instructions
+    🐻 buf systemPrompt❗️
+    🐻 buf 🔤❌n❌n---❌n❌n🔤❗️
+    
+    💭 Append conversation turns
+    🔂 msg 📚 session❗️ 🍇
+      👤 msg❓ ➡️ role
+      📄 msg❓ ➡️ content
+      
+      ↪️ role 🙌 🔤user🔤 🍇
+        🐻 buf 🔤User: 🧲content🧲❌n🔤❗️
+      🍉 🙅↪️ role 🙌 🔤assistant🔤 🍇
+        🐻 buf 🔤Assistant: 🧲content🧲❌n🔤❗️
+      🍉 🙅↪️ role 🙌 🔤tool🔤 🍇
+        🐻 buf 🔤Tool result: ❌n🧲content🧲❌n🔤❗️
+      🍉
+    🍉
+    
+    💭 Append response prefix
+    🐻 buf 🔤❌nAssistant: 🔤❗️
+    
+    ↩️ 🔡 buf❗️
+  🍉
+  
+  💭 Helper for building a session-less prompt
+  ❗️ 🏗 systemPrompt 🔡 userPrompt 🔡 ➡️ 🔡 🍇
+    🆕📓❗️ ➡️ session
+    📝 session 🔤user🔤 userPrompt❗️
+    ↩️ 🏗 👇 systemPrompt session❗️
+  🍉
+🍉

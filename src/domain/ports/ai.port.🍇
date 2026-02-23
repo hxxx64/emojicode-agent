@@ -1,0 +1,7 @@
+💭 AI Adapter Port
+💭 Defines the contract for AI model interaction
+
+🐊 📡 🍇
+  💭 Sends a prompt to the AI provider and returns the raw response
+  ❗️ 💬 prompt 🔡 ➡️ 🔡
+🍉

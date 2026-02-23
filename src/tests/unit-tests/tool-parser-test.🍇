@@ -1,0 +1,60 @@
+💭 ToolParser Unit Tests
+
+🐇 🧬 🧪 🍇
+  ✒️❗️ 🏁 🍇
+    😀 🔤🧬 Testing ToolParser...🔤❗️
+    
+    🆕🔍❗️ ➡️ parser
+    
+    💭 1. Basic read_file
+    🔍 parser 🔤<read_file><path>test.txt</path></read_file>🔤❗️ ➡️ tc1
+    ↪️ tc1 ➡️ t1 🍇
+      🔡 👇 📛 t1❓ 🔤read_file🔤 🔤correct tool name for read_file🔤❗️
+      ↪️ 📥 t1 🔤path🔤❓ ➡️ p 🍇 🔡 👇 p 🔤test.txt🔤 🔤correct path for read_file🔤❗️ 🍉 🙅 🍇 🙁 👇 🔤missing path param🔤❗️ 🍉
+    🍉 🙅 🍇 🙁 👇 🔤failed to parse basic read_file🔤❗️ 🍉
+    
+    💭 2. Basic write_file with multi-line content
+    🔍 parser 🔤<write_file><path>hello.py</path><content>print("hello")❌nprint("world")</content></write_file>🔤❗️ ➡️ tc2
+    ↪️ tc2 ➡️ t2 🍇
+      🔡 👇 📛 t2❓ 🔤write_file🔤 🔤correct tool name for write_file🔤❗️
+      ↪️ 📥 t2 🔤path🔤❓ ➡️ p 🍇 🔡 👇 p 🔤hello.py🔤 🔤correct path for write_file🔤❗️ 🍉
+      ↪️ 📥 t2 🔤content🔤❓ ➡️ c 🍇 🔡 👇 c 🔤print("hello")❌nprint("world")🔤 🔤correct content for write_file🔤❗️ 🍉
+    🍉 🙅 🍇 🙁 👇 🔤failed to parse basic write_file🔤❗️ 🍉
+    
+    💭 3. Invalid tool (no tags)
+    🔍 parser 🔤Just some text without tags🔤❗️ ➡️ tc3
+    ↪️ tc3 ➡️ t3 🍇 🙁 👇 🔤should NOT have parsed a tool from plain text🔤❗️ 🍉 🙅 🍇 ✅ 👇 🔤properly ignored text without tags🔤❗️ 🍉
+    
+    💭 4. Malformed tags (missing closing tag)
+    🔍 parser 🔤<read_file><path>test.txt</path>🔤❗️ ➡️ tc4
+    ↪️ tc4 ➡️ t4 🍇 🙁 👇 🔤should NOT parse with missing closing tag🔤❗️ 🍉 🙅 🍇 ✅ 👇 🔤properly ignored malformed tags🔤❗️ 🍉
+
+    💭 5. list_files with optional recursive param
+    🔍 parser 🔤<list_files><path>src</path><recursive>true</recursive></list_files>🔤❗️ ➡️ tc5
+    ↪️ tc5 ➡️ t5 🍇
+      🔡 👇 📛 t5❓ 🔤list_files🔤 🔤correct tool name for list_files🔤❗️
+      ↪️ 📥 t5 🔤recursive🔤❓ ➡️ r 🍇 🔡 👇 r 🔤true🔤 🔤correct recursive param🔤❗️ 🍉
+    🍉 🙅 🍇 🙁 👇 🔤failed to parse list_files🔤❗️ 🍉
+
+    💭 6. list_files without path (defaults to .)
+    🔍 parser 🔤<list_files></list_files>🔤❗️ ➡️ tc6
+    ↪️ tc6 ➡️ t6 🍇
+      🔡 👇 📛 t6❓ 🔤list_files🔤 🔤correct tool name for list_files no path🔤❗️
+      ↪️ 📥 t6 🔤path🔤❓ ➡️ p 🍇 🔡 👇 p 🔤.🔤 🔤should default path to .🔤❗️ 🍉
+    🍉 🙅 🍇 🙁 👇 🔤failed to parse list_files with no path🔤❗️ 🍉
+
+    💭 7. replace_in_file
+    🔍 parser 🔤<replace_in_file><path>main.🍇</path><diff>old -> new</diff></replace_in_file>🔤❗️ ➡️ tc7
+    ↪️ tc7 ➡️ t7 🍇
+      🔡 👇 📛 t7❓ 🔤replace_in_file🔤 🔤correct tool name for replace_in_file complex🔤❗️
+      ↪️ 📥 t7 🔤diff🔤❓ ➡️ d 🍇 🔡 👇 d 🔤old -> new🔤 🔤correct diff param complex with emoji path🔤❗️ 🍉
+    🍉 🙅 🍇 🙁 👇 🔤failed to parse replace_in_file complex🔤❗️ 🍉
+
+    💭 8. search_files
+    🔍 parser 🔤<search_files><path>.</path><search>findme</search></search_files>🔤❗️ ➡️ tc8
+    ↪️ tc8 ➡️ t8 🍇
+      🔡 👇 📛 t8❓ 🔤search_files🔤 🔤correct tool name for search_files🔤❗️
+      ↪️ 📥 t8 🔤search🔤❓ ➡️ s 🍇 🔡 👇 s 🔤findme🔤 🔤correct search param🔤❗️ 🍉
+    🍉 🙅 🍇 🙁 👇 🔤failed to parse search_files🔤❗️ 🍉
+  🍉
+🍉

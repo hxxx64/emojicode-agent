@@ -1,0 +1,58 @@
+💭 Mocks for testing
+
+💭 --- Mock AI Adapter ---
+🐇 🤥 🍇
+  🖍🆕 responses 🍨🐚🔡🍆
+  🖍🆕 callCount 🔢
+  🐊 📡
+  🆕 🍇 🆕🍨🐚🔡🍆❗️ ➡️ 🖍responses 0 ➡️ 🖍callCount 🍉
+  ❗️ 💊 res 🔡 🍇 🐻 responses res❗️ 🍉
+  ❗️ 💬 prompt 🔡 ➡️ 🔡 🍇
+    callCount ➡️ c
+    callCount ⬅️➕ 1
+    0 ➡️ 🖍🆕 count
+    🔂 r responses 🍇 count ⬅️➕ 1 🍉
+    ↪️ c ◀️ count 🍇
+      🐽 responses c❗️ ➡️ r ↩️ r
+    🍉 ↩️ 🔤Done🔤
+  🍉
+🍉
+
+💭 --- Mock File System Adapter ---
+🐇 📁 🍇
+  🖍🆕 files 🍯🐚🔡🍆
+  🐊 🗄
+  🆕 🍇 🆕🍯🐚🔡🍆❗️ ➡️ 🖍files 🍉
+  
+  ❗️ 📂 path 🔡 recursive 👌 ➡️ 🔡 🍇
+    🔍 path 🔤.🔤❗️ ➡️ findDot
+    ↪️ findDot ➡️ pos 🍇
+      ↩️ 🔤index.js❌ndog.js❌ncat.js🔤
+    🍉
+    ↩️ 🔤file1.txt❌nfile2.txt🔤
+  🍉
+  
+  ❗️ 📖 path 🔡 ➡️ 🔡 🍇
+    ↪️ 🐽 files path❗️ ➡️ content 🍇
+      ↩️ content
+    🍉
+    ↩️ 🔤Error: File not found: 🧲path🧲🔤
+  🍉
+  
+  ❗️ 💿 path 🔡 content 🔡 ➡️ 🔡 🍇
+    content ➡️ 🐽 files path❗️
+    ↩️ 🔤Success🔤
+  🍉
+  
+  ❗️ 🔄 path 🔡 diff 🔡 ➡️ 🔡 🍇
+    ↪️ 🐽 files path❗️ ➡️ content 🍇
+      🔤🧲content🧲❌n🧲diff🧲🔤 ➡️ 🐽 files path❗️
+      ↩️ 🔤Success🔤
+    🍉
+    ↩️ 🔤Error: File not found for replace: 🧲path🧲🔤
+  🍉
+  
+  ❗️ 🔍 path 🔡 search 🔡 ➡️ 🔡 🍇
+    ↩️ 🔤Match found in 🧲path🧲 for 🧲search🧲🔤
+  🍉
+🍉

@@ -1,0 +1,12 @@
+💭 OpenRouter AI Adapter
+💭 Handles HTTP communication with the OpenRouter API via C++ FFI (libcurl)
+
+🐇 🌐 🍇
+  🐊 📡
+  
+  🆕 🍇🍉
+  
+  💭 Sends a prompt to OpenRouter and returns the chat completion
+  💭 Requires OPENROUTER_API_KEY and OPENROUTER_MODEL environment variables
+  ❗️ 💬 prompt 🔡 ➡️ 🔡 📻 🔤openrouter_complete🔤
+🍉

@@ -1,0 +1,38 @@
+💭 Session Unit Tests
+
+🐇 🧼 🧪 🍇
+  ✒️❗️ 🏁 🍇
+    😀 🔤🧼 Testing Session...🔤❗️
+    
+    🆕📓❗️ ➡️ sess
+    
+    💭 Test empty session
+    📚 sess❗️ ➡️ msgsStart
+    0 ➡️ 🖍🆕 count0
+    🔂 m msgsStart 🍇 count0 ⬅️➕ 1 🍉
+    🔢 👇 count0 0 🔤session should start empty🔤❗️
+    
+    💭 Test adding messages
+    📝 sess 🔤user🔤 🔤Hello🔤❗️
+    📝 sess 🔤assistant🔤 🔤Hi!🔤❗️
+    
+    📚 sess❗️ ➡️ msgs
+    0 ➡️ 🖍🆕 count1
+    🔂 m msgs 🍇 count1 ⬅️➕ 1 🍉
+    🔢 👇 count1 2 🔤session should have 2 messages🔤❗️
+    
+    🐽 msgs 0❗️ ➡️ m1
+    🔡 👇 👤 m1❓ 🔤user🔤 🔤first message role should be user🔤❗️
+    🔡 👇 📄 m1❓ 🔤Hello🔤 🔤first message content should match🔤❗️
+    
+    🐽 msgs 1❗️ ➡️ m2
+    🔡 👇 👤 m2❓ 🔤assistant🔤 🔤second message role should be assistant🔤❗️
+    
+    💭 Test reset
+    🧹 sess❗️
+    📚 sess❗️ ➡️ msgsEmpty
+    0 ➡️ 🖍🆕 count2
+    🔂 m msgsEmpty 🍇 count2 ⬅️➕ 1 🍉
+    🔢 👇 count2 0 🔤session should be empty after reset🔤❗️
+  🍉
+🍉

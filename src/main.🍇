@@ -1,0 +1,90 @@
+💭 emojicode agent - Composition Root
+💭 Assembles the Architecture layers and starts the interaction loop
+
+📜 🔤application/services/agent.service.🍇🔤
+📜 🔤application/services/tool-executor.service.🍇🔤
+📜 🔤domain/entities/session.entity.🍇🔤
+📜 🔤domain/ports/ai.port.🍇🔤
+📜 🔤domain/ports/file-system.port.🍇🔤
+📜 🔤domain/ports/input.port.🍇🔤
+📜 🔤domain/ports/output.port.🍇🔤
+📜 🔤domain/services/prompt.service.🍇🔤
+📜 🔤domain/services/tool-parser.service.🍇🔤
+📜 🔤domain/value-objects/message.vo.🍇🔤
+📜 🔤domain/value-objects/tool-call.vo.🍇🔤
+📜 🔤domain/value-objects/tool-result.vo.🍇🔤
+📜 🔤infrastructure/adapters/ai/mock-ai.adapter.🍇🔤
+📜 🔤infrastructure/adapters/ai/openrouter-ai.adapter.🍇🔤
+📜 🔤infrastructure/adapters/persistence/native-file-system.adapter.🍇🔤
+📜 🔤infrastructure/adapters/ui/terminal-input.adapter.🍇🔤
+📜 🔤infrastructure/adapters/ui/terminal-output.adapter.🍇🔤
+📜 🔤infrastructure/config/system-prompt.config.🍇🔤
+
+🏁 🍇
+  😀 🔤❌n🔤❗️
+  😀 🔤███████╗███╗░░░███╗░█████╗░░░░░░██╗██╗░█████╗░░█████╗░██████╗░███████╗🔤❗️
+  😀 🔤██╔════╝████╗░████║██╔══██╗░░░░░██║██║██╔══██╗██╔══██╗██╔══██╗██╔════╝🔤❗️
+  😀 🔤█████╗░░██╔████╔██║██║░░██║░░░░░██║██║██║░░╚═╝██║░░██║██║░░██║█████╗░░🔤❗️
+  😀 🔤██╔══╝░░██║╚██╔╝██║██║░░██║██╗░░██║██║██║░░██╗██║░░██║██║░░██║██╔══╝░░🔤❗️
+  😀 🔤███████╗██║░╚═╝░██║╚█████╔╝╚█████╔╝██║╚█████╔╝╚█████╔╝██████╔╝███████╗🔤❗️
+  😀 🔤╚══════╝╚═╝░░░░░╚═╝░╚════╝░░╚════╝░╚═╝░╚════╝░░╚════╝░╚═════╝░╚══════╝🔤❗️
+  😀 🔤░█████╗░░██████╗░███████╗███╗░░██╗████████╗░░░░░░░░░░░░░░░░░░░░░░░░░░░🔤❗️
+  😀 🔤██╔══██╗██╔════╝░██╔════╝████╗░██║╚══██╔══╝░░░░░░░░░░░░░░░░░░░░░░░░░░░🔤❗️
+  😀 🔤███████║██║░░██╗░█████╗░░██╔██╗██║░░░██║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░🔤❗️
+  😀 🔤██╔══██║██║░░╚██╗██╔══╝░░██║╚████║░░░██║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░🔤❗️
+  😀 🔤██║░░██║╚██████╔╝███████╗██║░╚███║░░░██║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░🔤❗️
+  😀 🔤╚═╝░░╚═╝░╚═════╝░╚══════╝╚═╝░░╚══╝░░░╚═╝░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░🔤❗️
+  😀 🔤❌n                    ...You're living in the timeline where this exists❌n🔤❗️
+
+  🆕🎤❗️ ➡️ inputAdapter
+  📖🐇📜❗️ ➡️ systemPromptConfig
+  
+  🆕📝❗️ ➡️ promptService
+  🆕🔍❗️ ➡️ toolParserService
+  
+  🆕💾❗️ ➡️ fileSystemAdapter
+  🆕🛠 🔤.🔤 fileSystemAdapter❗️ ➡️ toolExecutorService
+  
+  🔤mock🔤 ➡️ 🖍🆕 provider
+  🔤mock-model🔤 ➡️ 🖍🆕 model
+
+  🌳🐇💻 🔤OPENROUTER_API_KEY🔤❗️ ➡️ apiKeyOpt
+  🖍🆕 agentService 🤖
+  ↪️ apiKeyOpt ➡️ apiKey 🍇
+    🆕🤖 🆕🌐❗️ systemPromptConfig promptService toolParserService toolExecutorService❗️ ➡️ 🖍agentService
+    🔤openrouter🔤 ➡️ 🖍provider
+    🔤openrouter/free🔤 ➡️ 🖍model
+    🌳🐇💻 🔤OPENROUTER_MODEL🔤❗️ ➡️ modelOpt
+    ↪️ modelOpt ➡️ envModel 🍇
+      envModel ➡️ 🖍model
+    🍉
+  🍉 🙅 🍇
+    🆕🤖 🆕🎭❗️ systemPromptConfig promptService toolParserService toolExecutorService❗️ ➡️ 🖍agentService
+  🍉
+
+  😀 🔤· ·  ⋆ · · ✦ · · ⋆ · · ⋆ · · · · · · · · · ⋆ · · ⋆ · · ⋆ · · ⋆ · · ✦ ·🔤❗️
+  😀 🔤            💫 🧲provider🧲  ✦  🛸 🧲model🧲🔤❗️
+  😀 🔤· · ⋆ · · ⋆ · · ⋆ · · ⋆ · · · · · · · · · ✦ · · ⋆ · · ⋆ · · ⋆ · ·  ⋆ ·❌n🔤❗️
+  
+  👍 ➡️ 🖍🆕 running
+  
+  🔁 running 🍇
+    📖 inputAdapter 🔤> 🔤❗️ ➡️ userInput
+    ↪️ userInput 🙌 🔤quit🔤 🍇
+      😀 🔤🔤❗️
+      😀 🔤Goodbye! 👋🔤❗️
+      👎 ➡️ 🖍running
+    🍉 🙅↪️ userInput 🙌 🔤🔤 🍇
+    🍉 🙅↪️ userInput 🙌 🔤__EOF__🔤 🍇
+      😀 🔤🔤❗️
+      😀 🔤Goodbye! 👋🔤❗️
+      👎 ➡️ 🖍running
+    🍉 🙅 🍇
+      😀 🔤🔤❗️
+      🆕📻❗️ ➡️ outputAdapter
+      🎯 agentService userInput outputAdapter❗️ ➡️ taskResult
+      😀 taskResult❗️
+      😀 🔤🔤❗️
+    🍉
+  🍉
+🍉

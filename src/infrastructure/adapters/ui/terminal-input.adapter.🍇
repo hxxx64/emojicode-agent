@@ -1,0 +1,10 @@
+💭 Terminal Input Adapter
+💭 Handles blocking terminal input via C++ FFI (getline)
+
+🐇 🎤 🍇
+  🐊 📋
+  🆕 🍇🍉
+  
+  💭 Displays a prompt and blocks until a line is received from stdin
+  ❗️ 📖 prompt 🔡 ➡️ 🔡 📻 🔤stdin_readline🔤
+🍉

@@ -1,0 +1,19 @@
+💭 Tool Execution Result Value Object
+💭 Represents the outcome (success or failure) of a tool invocation
+
+🕊 📤 🍇
+  🖍🆕 success 👌  💭 Execution status
+  🖍🆕 output 🔡   💭 Model-facing output or error description
+  
+  🆕 🍼 success 👌 🍼 output 🔡 🍇🍉
+  
+  💭 Returns true if the tool executed successfully
+  ❓ ✅ ➡️ 👌 🍇
+    ↩️ success
+  🍉
+  
+  💭 Returns the raw result or error message
+  ❓ 📄 ➡️ 🔡 🍇
+    ↩️ output
+  🍉
+🍉

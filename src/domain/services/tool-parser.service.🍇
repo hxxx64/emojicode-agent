@@ -1,0 +1,163 @@
+💭 Tool Parsing Domain Service
+💭 Extracts structured tool calls from raw AI model responses
+
+🐇 🔍 🍇
+  🆕 🍇🍉
+
+  💭 Internal helper to get character count
+  ❗️ 📏 string 🔡 ➡️ 🔢 🍇
+    0 ➡️ 🖍🆕 count
+    🔂 char string 🍇 count ⬅️➕ 1 🍉
+    ↩️ count
+  🍉
+
+  💭 Internal helper for character-safe substring
+  ❗️ 🔪 string 🔡 from 🔢 length 🔢 ➡️ 🔡 🍇
+    🆕🔠❗️ ➡️ sb
+    0 ➡️ 🖍🆕 i
+    from ➕ length ➡️ end
+    🔂 char string 🍇
+      ↪️ i ▶️🙌 from 🤝 i ◀️ end 🍇
+        🐻 sb char❗️
+      🍉
+      i ⬅️➕ 1
+    🍉
+    ↩️ 🔡 sb❗️
+  🍉
+
+  💭 Internal helper for character-safe find
+  ❗️ 🔍 string 🔡 needle 🔡 ➡️ 🍬🔢 🍇
+    📏 👇 string❗️ ➡️ stringLen
+    📏 👇 needle❗️ ➡️ needleLen
+    ↪️ needleLen ▶️ stringLen 🍇 ↩️ 🤷 🍉
+    
+    0 ➡️ 🖍🆕 i
+    stringLen ➖ needleLen ➡️ end
+    🔁 i ◀️🙌 end 🍇
+      🔪 👇 string i needleLen❗️ ➡️ sub
+      ↪️ sub 🙌 needle 🍇 ↩️ i 🍉
+      i ⬅️➕ 1
+    🍉
+    ↩️ 🤷
+  🍉
+
+  💭 Extracts the content between XML-like tags <paramName>...</paramName>
+  ❗️ 📤 response 🔡 paramName 🔡 ➡️ 🍬🔡 🍇
+    🔤<🧲paramName🧲>🔤 ➡️ openTag
+    🔤</🧲paramName🧲>🔤 ➡️ closeTag
+    🔍 👇 response openTag❗️ ➡️ openingTagPosOpt
+    ↪️ openingTagPosOpt ➡️ openingTagPos 🍇
+      openingTagPos ➕ 📏 👇 openTag❗️ ➡️ contentStartIndex
+      📏 👇 response❗️ ➖ contentStartIndex ➡️ remainingLength
+      🔪 👇 response contentStartIndex remainingLength❗️ ➡️ remainingText
+      🔍 👇 remainingText closeTag❗️ ➡️ closingTagPosOpt
+      ↪️ closingTagPosOpt ➡️ closingTagPos 🍇
+        ↩️ 🔪 👇 remainingText 0 closingTagPos❗️
+      🍉
+    🍉
+    ↩️ 🤷
+  🍉
+  
+  💭 Parses a response to find and construct a specific tool call (read, write, etc.)
+  ❗️ 🔍 response 🔡 ➡️ 🍬🔧 🍇
+    🖍🆕 parsedToolCall 🍬🔧
+    
+    ↪️ 🔍 response 🔤<read_file>🔤❗️ ➡️ toolTagPos 🍇
+      ↪️ 🔍 response 🔤</read_file>🔤❗️ ➡️ toolCloseTagPos 🍇
+        📤 👇 response 🔤path🔤❗️ ➡️ pathOpt
+        ↪️ pathOpt ➡️ path 🍇
+          🆕🍯🐚🔡🍆❗️ ➡️ 🖍🆕 params
+          path ➡️ 🐽 params 🔤path🔤❗️
+          🆕🔧 🔤read_file🔤 params❗️ ➡️ toolCall
+          toolCall ➡️ 🖍parsedToolCall
+        🍉
+      🍉
+    🍉 🙅↪️ 🔍 response 🔤<write_file>🔤❗️ ➡️ toolTagPos 🍇
+      ↪️ 🔍 response 🔤</write_file>🔤❗️ ➡️ toolCloseTagPos 🍇
+        📤 👇 response 🔤path🔤❗️ ➡️ pathOpt
+        📤 👇 response 🔤content🔤❗️ ➡️ contentOpt
+        ↪️ pathOpt ➡️ path 🍇
+          ↪️ contentOpt ➡️ content 🍇
+            🆕🍯🐚🔡🍆❗️ ➡️ 🖍🆕 params
+            path ➡️ 🐽 params 🔤path🔤❗️
+            content ➡️ 🐽 params 🔤content🔤❗️
+            🆕🔧 🔤write_file🔤 params❗️ ➡️ toolCall
+            toolCall ➡️ 🖍parsedToolCall
+          🍉
+        🍉
+      🍉
+    🍉 🙅↪️ 🔍 response 🔤<list_files>🔤❗️ ➡️ toolTagPos 🍇
+      ↪️ 🔍 response 🔤</list_files>🔤❗️ ➡️ toolCloseTagPos 🍇
+        📤 👇 response 🔤path🔤❗️ ➡️ pathOpt
+        📤 👇 response 🔤recursive🔤❗️ ➡️ recurOpt
+        ↪️ pathOpt ➡️ path 🍇
+          🆕🍯🐚🔡🍆❗️ ➡️ 🖍🆕 params
+          path ➡️ 🐽 params 🔤path🔤❗️
+          ↪️ recurOpt ➡️ recur 🍇
+            recur ➡️ 🐽 params 🔤recursive🔤❗️
+          🍉 🙅 🍇
+            🔤false🔤 ➡️ 🐽 params 🔤recursive🔤❗️
+          🍉
+          🆕🔧 🔤list_files🔤 params❗️ ➡️ toolCall
+          toolCall ➡️ 🖍parsedToolCall
+        🍉 🙅 🍇
+          🆕🍯🐚🔡🍆❗️ ➡️ 🖍🆕 params
+          🔤.🔤 ➡️ 🐽 params 🔤path🔤❗️
+          ↪️ recurOpt ➡️ recur 🍇
+            recur ➡️ 🐽 params 🔤recursive🔤❗️
+          🍉 🙅 🍇
+            🔤false🔤 ➡️ 🐽 params 🔤recursive🔤❗️
+          🍉
+          🆕🔧 🔤list_files🔤 params❗️ ➡️ toolCall
+          toolCall ➡️ 🖍parsedToolCall
+        🍉
+      🍉
+    🍉 🙅↪️ 🔍 response 🔤<replace_in_file>🔤❗️ ➡️ toolTagPos 🍇
+      ↪️ 🔍 response 🔤</replace_in_file>🔤❗️ ➡️ toolCloseTagPos 🍇
+        📤 👇 response 🔤path🔤❗️ ➡️ pathOpt
+        📤 👇 response 🔤diff🔤❗️ ➡️ diffOpt
+        ↪️ pathOpt ➡️ path 🍇
+          ↪️ diffOpt ➡️ diff 🍇
+            🆕🍯🐚🔡🍆❗️ ➡️ 🖍🆕 params
+            path ➡️ 🐽 params 🔤path🔤❗️
+            diff ➡️ 🐽 params 🔤diff🔤❗️
+            🆕🔧 🔤replace_in_file🔤 params❗️ ➡️ toolCall
+            toolCall ➡️ 🖍parsedToolCall
+          🍉
+        🍉
+      🍉
+    🍉 🙅↪️ 🔍 response 🔤<search_files>🔤❗️ ➡️ toolTagPos 🍇
+      ↪️ 🔍 response 🔤</search_files>🔤❗️ ➡️ toolCloseTagPos 🍇
+        📤 👇 response 🔤path🔤❗️ ➡️ pathOpt
+        📤 👇 response 🔤search🔤❗️ ➡️ searchOpt
+        ↪️ pathOpt ➡️ path 🍇
+          ↪️ searchOpt ➡️ searchTerm 🍇
+            🆕🍯🐚🔡🍆❗️ ➡️ 🖍🆕 params
+            path ➡️ 🐽 params 🔤path🔤❗️
+            searchTerm ➡️ 🐽 params 🔤search🔤❗️
+            🆕🔧 🔤search_files🔤 params❗️ ➡️ toolCall
+            toolCall ➡️ 🖍parsedToolCall
+          🍉 🙅 🍇
+            🆕🍯🐚🔡🍆❗️ ➡️ 🖍🆕 params
+            path ➡️ 🐽 params 🔤path🔤❗️
+            🔤🔤 ➡️ 🐽 params 🔤search🔤❗️
+            🆕🔧 🔤search_files🔤 params❗️ ➡️ toolCall
+            toolCall ➡️ 🖍parsedToolCall
+          🍉
+        🍉 🙅 🍇
+          🆕🍯🐚🔡🍆❗️ ➡️ 🖍🆕 params
+          🔤.🔤 ➡️ 🐽 params 🔤path🔤❗️
+          ↪️ searchOpt ➡️ searchTerm 🍇
+            searchTerm ➡️ 🐽 params 🔤search🔤❗️
+          🍉 🙅 🍇
+            🔤🔤 ➡️ 🐽 params 🔤search🔤❗️
+          🍉
+          🆕🔧 🔤search_files🔤 params❗️ ➡️ toolCall
+          toolCall ➡️ 🖍parsedToolCall
+        🍉
+      🍉
+    🍉
+    
+    ↩️ parsedToolCall
+  🍉
+🍉

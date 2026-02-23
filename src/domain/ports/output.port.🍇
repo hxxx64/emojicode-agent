@@ -1,0 +1,7 @@
+💭 Output Port
+💭 Defines the contract for real-time progress reporting (e.g., terminal, socket)
+
+🐊 🖼️ 🍇
+  💭 Emits text to the output stream
+  ❗️ 📤 text 🔡
+🍉

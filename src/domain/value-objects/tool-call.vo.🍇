@@ -1,0 +1,50 @@
+💭 Tool Call Value Object
+💭 Represents a specific tool invocation requested by the AI
+
+🕊 🔧 🍇
+  🖍🆕 name 🔡          💭 Tool name (e.g., read_file, write_file)
+  🖍🆕 params 🍯🐚🔡🍆   💭 Mapping of parameter names to their values
+  
+  🆕 🍼 name 🔡 🍼 params 🍯🐚🔡🍆 🍇🍉
+  
+  💭 Returns the tool name
+  ❓ 📛 ➡️ 🔡 🍇
+    ↩️ name
+  🍉
+  
+  💭 Returns all tool parameters
+  ❓ 📋 ➡️ 🍯🐚🔡🍆 🍇
+    ↩️ params
+  🍉
+  
+  💭 Retrieves a specific parameter value by its key
+  ❓ 📥 key 🔡 ➡️ 🍬🔡 🍇
+    ↩️ 🐽 params key❗️
+  🍉
+
+  💭 Returns a human-readable summary of the tool call
+  ❓ 📝 ➡️ 🔡 🍇
+    🔤🔤 ➡️ 🖍🆕 toolSummaryInfo
+    ↪️ 🐽 params 🔤path🔤❗️ ➡️ rawPath 🍇
+      rawPath ➡️ 🖍🆕 cleanPath
+      ↪️ 🔍 rawPath 🔤./🔤❗️ ➡️ dotSlashPos 🍇
+        ↪️ dotSlashPos 🙌 0 🍇
+          📐 rawPath❗️ ➖ 2 ➡️ pathLength
+          🔪 rawPath 2 pathLength❗️ ➡️ 🖍 cleanPath
+        🍉
+      🍉
+
+      ↪️ cleanPath 🙌 🔤🔤 🍇 🔤.🔤 ➡️ 🖍 cleanPath 🍉
+
+      🔤 ✦ 🧲cleanPath🧲🔤 ➡️ 🖍 toolSummaryInfo
+
+      ↪️ name 🙌 🔤search_files🔤 🍇
+        ↪️ 🐽 params 🔤search🔤❗️ ➡️ searchPattern 🍇
+          🔤 ✦ 🧲cleanPath🧲 (🧲searchPattern🧲)🔤 ➡️ 🖍 toolSummaryInfo
+        🍉
+      🍉
+    🍉
+
+    ↩️ 🔤🧲name🧲🧲toolSummaryInfo🧲🔤
+  🍉
+🍉
